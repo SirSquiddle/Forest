@@ -374,6 +374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
+  hasBow: 1
+  orientation: down
+  arrow: {fileID: 1412010199097220, guid: f4f532b14efead446a45effc8f5a2ee0, type: 2}
 --- !u!1 &880138456
 GameObject:
   m_ObjectHideFlags: 0
