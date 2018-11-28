@@ -55,6 +55,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\ArrowScript.cs" />
      <Compile Include="Assets\Scripts\CharacterController.cs" />
+     <Compile Include="Assets\Scripts\DoorScript.cs" />
+     <Compile Include="Assets\Scripts\LeverDoorScript.cs" />
      <Compile Include="Assets\Scripts\MainMenuScript.cs" />
      <None Include="Assets\infos.txt.txt" />
  <Reference Include="UnityEditor.StandardEvents">

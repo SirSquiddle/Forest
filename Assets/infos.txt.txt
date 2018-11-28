@@ -3,3 +3,9 @@ Camera size 1
 
 
 Scale factor : 6.25
+
+
+orientations pour animation
+0 - bas
+1 - side
+2 - haut

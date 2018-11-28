@@ -42,7 +42,6 @@ public class ArrowScript : MonoBehaviour
 	void Update ()
 	{
 	    timer += Time.deltaTime;
-        Debug.Log(gameObject.transform.rotation);
 	    switch (orientation)
 	    {
 	        case "up":
