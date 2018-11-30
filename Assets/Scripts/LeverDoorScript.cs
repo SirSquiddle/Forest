@@ -22,9 +22,11 @@ public class LeverDoorScript : MonoBehaviour
         if (col.transform.tag == "arrow")
         {
 
+            SpriteRenderer rend = gameObject.GetComponent<SpriteRenderer>();
             //ParentGameObject.transform.Find("Door").gameObject.SetActive(false);
             DoorGameObject.transform.Find("OpenedDoor").gameObject.SetActive(true);
             DoorGameObject.transform.Find("ClosedDoor").gameObject.SetActive(false);
+            rend.color = Color.green;
             Destroy(col.gameObject);
         }
     }

@@ -14,7 +14,7 @@ public class ArrowScript : MonoBehaviour
 	void Start ()
 	{
 	    orientation = GameObject.Find("ForestCharacter").GetComponent<CharacterController>().orientation;
-	    gameObject.transform.position = GameObject.Find("ForestCharacter").transform.position;
+	    gameObject.transform.position = GameObject.Find("ForestCharacter").transform.position+ new Vector3(0,-0.4f,0);
         timer = 0;
 	    switch (orientation)
 	    {

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Security.Policy;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ public class CharacterController : MonoBehaviour
 	
 	void Update ()
 	{
-
+        //Makes a timer that waits until the end of the animation before putting false in the attack animator variable. Also waits the end of the animation to shoot the arrow
 	    if (hasattacked)
 	    {
 	        timer += Time.deltaTime;
@@ -37,7 +38,7 @@ public class CharacterController : MonoBehaviour
 	        }
 	    }
 
-	    //animator.SetBool("attack", false);
+	    //Checks if the player is moving
 
         if (Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)
 	    {
@@ -55,10 +56,6 @@ public class CharacterController : MonoBehaviour
 
             animator.SetInteger("direction", 1);
 
-            //Moves the player from Input.GetAxis("Horizontal")*Time.deltaTime on the x axis
-
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x + speed*Input.GetAxis("Horizontal")*Time.deltaTime, gameObject.transform.position.y, gameObject.transform.position.z);
-
             //change orientation according to Input.GetAxisRaw("Horizontal") --- if -1 -> "left" --- if 1 -> "right" 
 
             if (Input.GetAxisRaw("Horizontal") == -1)
@@ -68,6 +65,15 @@ public class CharacterController : MonoBehaviour
                 {
                     Flip();
                 }
+
+                RaycastHit hit;
+                if (!Physics2D.Raycast(transform.position + new Vector3(-0.5f, -0.5f, 0), transform.TransformDirection(Vector3.left), 0.1f) || Physics2D.Raycast(transform.position + new Vector3(-0.5f, -0.5f, 0), transform.TransformDirection(Vector3.left), 0.1f).collider.tag != "staticobstacle")
+                {
+                    //Moves the player from Input.GetAxis("Horizontal")*Time.deltaTime on the x axis
+
+                    gameObject.transform.Translate(speed * Input.GetAxis("Horizontal") * Time.deltaTime, 0, 0);
+                }
+
             }
             else if (Input.GetAxisRaw("Horizontal") == 1)
             {
@@ -76,7 +82,17 @@ public class CharacterController : MonoBehaviour
                 {
                     Flip();
                 }
+
+                if (!Physics2D.Raycast(transform.position + new Vector3(0.5f, -0.5f, 0), transform.TransformDirection(Vector3.right), 0.1f) || Physics2D.Raycast(transform.position + new Vector3(0.5f, -0.5f, 0), transform.TransformDirection(Vector3.right), 0.1f).collider.tag != "staticobstacle")
+                {
+                    //Moves the player from Input.GetAxis("Horizontal")*Time.deltaTime on the x axis
+
+                    gameObject.transform.Translate(speed * Input.GetAxis("Horizontal") * Time.deltaTime, 0, 0);
+                }
+                    
             }
+
+            
         }
 
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow))
@@ -92,6 +108,14 @@ public class CharacterController : MonoBehaviour
 
                 animator.SetInteger("direction", 0);
 
+                if (!Physics2D.Raycast(transform.position+new Vector3(0,-0.9f,0), transform.TransformDirection(Vector3.down), 0.5f) || Physics2D.Raycast(transform.position + new Vector3(0, -1, 0), transform.TransformDirection(Vector3.down), 0.5f).collider.tag != "staticobstacle")
+                {
+                    
+                    //Moves the player from Input.GetAxis("Vertical")*Time.deltaTime on the y axis
+
+                    gameObject.transform.Translate(0, speed * Input.GetAxis("Vertical") * Time.deltaTime, 0);
+                }
+
             }
             else if (Input.GetAxisRaw("Vertical") == 1)
             {
@@ -100,11 +124,16 @@ public class CharacterController : MonoBehaviour
                 //sets the animator parameter "direction" to 2 (up) to use the right animation
 
                 animator.SetInteger("direction", 2);
+
+                if (!Physics2D.Raycast(transform.position, transform.TransformDirection(Vector3.up), 0.5f) || Physics2D.Raycast(transform.position, transform.TransformDirection(Vector3.up), 0.5f).collider.tag != "staticobstacle")
+                {
+                    //Moves the player from Input.GetAxis("Vertical")*Time.deltaTime on the y axis
+
+                    gameObject.transform.Translate(0, speed * Input.GetAxis("Vertical") * Time.deltaTime, 0);
+                }
             }
 
-            //Moves the player from Input.GetAxis("Vertical")*Time.deltaTime on the y axis
-
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + speed * Input.GetAxis("Vertical")*Time.deltaTime, gameObject.transform.position.z);
+            
 
         }
 
@@ -118,9 +147,10 @@ public class CharacterController : MonoBehaviour
     {
         if (hasBow && !hasattacked)
         {
-            //shoots an arrow in the right direction
+            //starts the animation that shoots an arrow in the right direction
             animator.SetBool("attack", true);
             hasattacked = true;
+            //shoots an arrow with 0.4s delay to match the animation
             Invoke("Shootforrealthistime",0.4f);
         }
         else
@@ -131,8 +161,11 @@ public class CharacterController : MonoBehaviour
 
     public void Shootforrealthistime()
     {
+        //actually shoots the arrow
         Instantiate(arrow);
     }
+
+    //Flips the character sprite to make him look left or right
 
     public void Flip()
     {

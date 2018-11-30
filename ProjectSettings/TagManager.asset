@@ -6,6 +6,9 @@ TagManager:
   tags:
   - arrow
   - activable
+  - InteractablePlant
+  - breakable
+  - staticobstacle
   layers:
   - Default
   - TransparentFX
