@@ -9,6 +9,8 @@ TagManager:
   - InteractablePlant
   - breakable
   - staticobstacle
+  - button
+  - Lever
   layers:
   - Default
   - TransparentFX

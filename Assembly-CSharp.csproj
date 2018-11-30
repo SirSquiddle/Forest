@@ -55,10 +55,12 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\ArrowScript.cs" />
      <Compile Include="Assets\Scripts\BreakableScript.cs" />
+     <Compile Include="Assets\Scripts\BttonFenceScript.cs" />
      <Compile Include="Assets\Scripts\CharacterController.cs" />
      <Compile Include="Assets\Scripts\DoorScript.cs" />
      <Compile Include="Assets\Scripts\InteractablePlantScript.cs" />
      <Compile Include="Assets\Scripts\LeverDoorScript.cs" />
+     <Compile Include="Assets\Scripts\LeverFenceScript.cs" />
      <Compile Include="Assets\Scripts\MainMenuScript.cs" />
      <Compile Include="Assets\Scripts\ObstacleScript.cs" />
      <None Include="Assets\infos.txt.txt" />
